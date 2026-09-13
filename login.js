@@ -89,7 +89,7 @@ async function checkCode() {
         dot.classList.add("correct");
       });
       setTimeout(() => {
-        window.location.href = "main.html";
+        window.location.href = "A7K29F.html";
       }, 500);
     } else {
       errorMessage.classList.add("show");
