@@ -250,7 +250,9 @@ header {
   font-weight: 600;
   white-space: nowrap;
   z-index: 1;
+  background-color: #72c487;
 }
+
 
 /* ===== ОВЕРЛЕЙ ===== */
 .poll-overlay {
