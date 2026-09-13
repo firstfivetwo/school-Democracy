@@ -236,7 +236,7 @@ header {
   overflow: hidden;
   pointer-events: none;
   z-index: 2;
-  background: transparent;
+  background-color: #8bcc9b;
   border-radius: 20px;
 }
 
@@ -250,8 +250,8 @@ header {
   font-weight: 600;
   white-space: nowrap;
   z-index: 1;
-  background-color: #72c487;
 }
+
 
 
 /* ===== ОВЕРЛЕЙ ===== */
