@@ -4,14 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const checkboxes = document.querySelectorAll('.poll-checkbox');
   const sliderTrack = document.getElementById('pollSliderTrack');
   const sliderThumb = document.getElementById('pollSliderThumb');
-  const sliderText = sliderTrack.querySelector('.slider-text');
-  
+  const sliderText = sliderTrack ? sliderTrack.querySelector('.slider-text') : null;
+
   let isDragging = false;
   let startX = 0;
   let currentX = 0;
   let thumbOffset = 0;
   let isCompleted = false;
   let selectedOption = null;
+
+  // Если опроса на странице нет — выходим, чтобы не было ошибок
+  if (!pollContainer || !sliderTrack || !sliderThumb) {
+    return;
+  }
 
   // === 1. ЛОГИКА ЧЕКБОКСОВ (только один активный) ===
   checkboxes.forEach(cb => {
@@ -54,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     currentX = newX;
 
     const progress = newX / maxOffset;
-    
+
     // Меняем цвет от красного к зеленому
     const red = 255 - Math.round(progress * 220);
     const green = 59 + Math.round(progress * 196);
@@ -67,71 +72,58 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const onSlideComplete = async () => {
-  // 1. СНАЧАЛА проверяем, выбран ли вариант
-  if (!selectedOption) {
-    resetSlider();
-    sliderTrack.classList.add('shake');
-    setTimeout(() => sliderTrack.classList.remove('shake'), 300);
-    return;
-  }
+    // 1. СНАЧАЛА проверяем, выбран ли вариант
+    if (!selectedOption) {
+      resetSlider();
+      sliderTrack.classList.add('shake');
+      setTimeout(() => sliderTrack.classList.remove('shake'), 300);
+      return;
+    }
 
-  // 2. Только теперь блокируем слайдер
-  isCompleted = true;
-  isDragging = false;
-  sliderThumb.classList.remove('dragging');
-  sliderThumb.style.cursor = 'default';
+    // 2. Только теперь блокируем слайдер
+    isCompleted = true;
+    isDragging = false;
+    sliderThumb.classList.remove('dragging');
+    sliderThumb.style.cursor = 'default';
 
-  if (sliderText) sliderText.style.opacity = '0';
-  sliderThumb.style.background = '#34c759';
-  sliderThumb.style.boxShadow = '0 4px 20px rgba(52, 199, 89, 0.6)';
-  sliderThumb.innerHTML = `
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="white"/>
-    </svg>
-  `;
+    if (sliderText) sliderText.style.opacity = '0';
+    sliderThumb.style.background = '#34c759';
+    sliderThumb.style.boxShadow = '0 4px 20px rgba(52, 199, 89, 0.6)';
+    sliderThumb.innerHTML = `
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="white"/>
+      </svg>
+    `;
 
-  // 3. Отправляем голос на сервер
-  try {
-    const response = await fetch('/api/vote', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ option: selectedOption })
-    });
+    // 3. Отправляем голос на сервер
+    try {
+      const response = await fetch('/api/vote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ option: selectedOption })
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (data.success) {
-      localStorage.setItem('poll_voted_stolovaya', 'true');
-      setTimeout(() => {
-        pollContainer.classList.add('voted');
-        overlay.classList.add('show');
-      }, 400);
-    } else if (data.error === 'Already voted') {
-      localStorage.setItem('poll_voted_stolovaya', 'true');
-      setTimeout(() => {
-        pollContainer.classList.add('voted');
-        overlay.classList.add('show');
-      }, 400);
-    } else {
+      if (data.success) {
+        localStorage.setItem('poll_voted_stolovaya', 'true');
+        setTimeout(() => {
+          pollContainer.classList.add('voted');
+          overlay.classList.add('show');
+        }, 400);
+      } else if (data.error === 'Already voted') {
+        localStorage.setItem('poll_voted_stolovaya', 'true');
+        setTimeout(() => {
+          pollContainer.classList.add('voted');
+          overlay.classList.add('show');
+        }, 400);
+      } else {
+        resetSlider();
+      }
+    } catch (error) {
+      console.error('Ошибка при отправке голоса:', error);
       resetSlider();
     }
-  } catch (error) {
-    console.error('Ошибка при отправке голоса:', error);
-    resetSlider();
-  }
-};
-
-    // Сохраняем в localStorage
-    localStorage.setItem('poll_voted_stolovaya', 'true');
-    
-    // Отправляем голос на сервер (если нужно)
-    // fetch('/api/vote', { ... });
-
-    // Показываем оверлей "Голос учтён"
-    setTimeout(() => {
-      pollContainer.classList.add('voted');
-      overlay.classList.add('show');
-    }, 400);
   };
 
   const resetSlider = () => {
@@ -141,7 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sliderText) sliderText.style.opacity = '1';
     currentX = 0;
     isDragging = false;
+    isCompleted = false; // ВАЖНО: сбрасываем, чтобы можно было попробовать снова
     sliderThumb.classList.remove('dragging');
+    sliderThumb.classList.remove('completed');
   };
 
   // === 4. СОБЫТИЯ МЫШИ И ТАЧА ===
@@ -163,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!isDragging || isCompleted) return;
     isDragging = false;
     sliderThumb.classList.remove('dragging');
-    
+
     const maxOffset = getMaxOffset();
     if (currentX < maxOffset) {
       resetSlider();
