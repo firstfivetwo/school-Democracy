@@ -67,6 +67,27 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const onSlideComplete = () => {
+    try {
+  // Отправляем голос на сервер
+  const response = await fetch('/api/vote', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ option: selectedOption })
+  });
+
+  const data = await response.json();
+
+  if (data.success) {
+    localStorage.setItem('poll_voted_stolovaya', 'true');
+    setTimeout(() => {
+      pollContainer.classList.add('voted');
+      overlay.classList.add('show');
+    }, 400);
+  }
+} catch (error) {
+  console.error('Ошибка при отправке голоса:', error);
+  resetSlider();
+}
     // Проверяем, выбран ли вариант
     if (!selectedOption) {
       // Если не выбран — возвращаем слайдер назад
