@@ -88,5 +88,23 @@
       <p>Платформа в разработке</p>
     </footer>
   <script src="script.js"></script>
+  <script>
+  async function checkSession() {
+    try {
+      const response = await fetch('/api/check-session');
+      const data = await response.json();
+
+      if (data.authenticated) {
+        // У пользователя уже есть пропуск — сразу в школу
+        window.location.href = 'A7K29F.html';
+      }
+    } catch (error) {
+      // Если ошибка — ничего не делаем, показываем лендинг
+      console.log('Проверка сессии не удалась');
+    }
+  }
+
+  checkSession();
+</script>
 </body>
 </html>
