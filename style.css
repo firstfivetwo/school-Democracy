@@ -1,0 +1,877 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: 'Montserrat', sans-serif;
+}
+body {
+background: #2339B7;
+background: linear-gradient(135deg, #2339B7 0%, #FBFBFB 100%);
+overflow-x: hidden;
+width: 100%;
+max-width: 100%;
+}
+
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  padding: 20px;
+}
+
+.header_container {
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  background-color: rgba(255, 255, 255, 0.914);
+  backdrop-filter: blur(15px);
+
+  padding: 10px;
+
+  border-radius: 50px;
+
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+  width: 81px;
+  height: auto;
+
+  flex-shrink: 0;
+  
+  position: relative; /* Чтобы быть уверенным, что лого на своем месте */
+  z-index: 2; /* Чтобы лого был поверх текста при наложении */
+}
+
+
+.header_text  {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+
+  white-space: normal;
+
+  min-width: 0;
+
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; 
+  padding: 0 100px; 
+  z-index: 1; 
+  pointer-events: none; 
+}
+
+
+
+.hero_container {
+  display: flex;
+  margin-top: 20px;
+  padding: 20px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.text_hero_container h1{
+  font-size: 40px;
+  color: white;
+}
+
+.hero_image_container img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    display: block;
+}
+
+.hero_lined {
+  color: rgb(251, 3, 3);
+  background-color: white;
+}
+
+.text_hero_container p {
+  margin-top: 30px;
+  font-size: 20px;
+  color: white;
+  border: 1px solid white;
+  padding: 15px;
+  border-radius: 20px;
+  box-sizing:content-box;
+}
+
+/* ===== СЛАЙДЕР ===== */
+
+.slide_all {
+  display: flex;
+  justify-content: center;
+}
+
+.slider-container {
+  width: 100%;
+  max-width: 350px;
+  padding: 20px;
+  height: 100px;
+}
+
+.slider {
+  background: rgba(255, 255, 255, 0.77);
+  border-radius: 65px;
+  padding: 6px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.slider-track {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50px;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+}
+
+/* ОСНОВНОЙ ТЕКСТ - должен быть непрозрачным */
+.slider-text {
+  position: absolute;
+  font-family: "Google Sans", sans-serif;
+  top: 50%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  color: #1a1a1a; /* ИЗМЕНЕНО: теперь непрозрачный черный */
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.001px;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.1s ease; /* Добавлено для плавности */
+}
+
+/* МАСКА - будет скрывать текст слева направо */
+.slider-text-mask {
+  position: absolute;
+  border-radius: 20px;
+  top: 0;
+  left: 0;
+  width: 0%; /* НАЧИНАЕТСЯ С 0% */
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  background: rgb(202, 225, 208); /* Прозрачный фон */
+}
+
+
+/* ПОЛЗУНОК */
+.slider-thumb {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 90px;
+  height: 90px;
+  background: #ff3b30;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(255, 59, 48, 0.4);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  cursor: grab;
+  z-index: 2;
+  touch-action: none;
+  cursor: grab;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+
+  touch-action: none;
+}
+.slider-thumb.dragging {
+  cursor: grabbing;
+}
+
+.slider-thumb:active {
+  cursor: grabbing;
+  box-shadow: 0 6px 25px rgba(255, 59, 48, 0.6);
+}
+
+.slider-thumb svg {
+  width: 30px;
+  height: 30px;
+  fill: white;
+  pointer-events: none;
+}
+
+/* Анимация пульсации */
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(255, 59, 48, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 30px rgba(255, 59, 48, 0.6);
+  }
+}
+
+.slider-thumb {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.slider-thumb.dragging {
+  animation: none;
+}
+
+.provedy {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 50px;
+  align-items: center;
+}
+
+.provedy p {
+  color: white;
+}
+
+.provedy_vpravo {
+  width: 35px;
+}
+
+.main_block {
+  background-color: #4d5aa7;
+  margin: 10px;
+  margin-top: 30px;
+  border-top-right-radius: 40px;
+  border-top-left-radius: 40px;
+}
+
+.main_text {
+  padding: 20px;
+}
+
+.main_text h3 {
+  color: white;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.main_text p {
+  color: rgb(246, 5, 5);
+  background-color: #e3e3e3fc;
+  font-weight: 600;
+  padding-block: 10px;
+  padding-left: 5px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.main_block {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  margin: 20px 15px;
+  margin-top: 30px;
+  border-radius: 30px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.main_text h3 {
+  color: white;
+  font-size: 22px;
+  margin-bottom: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.main_list { background-color: #2339b78a; padding: 5px; border-radius: 20px; padding-top: 15px; border: solid 1px #fbfbfb82; }
+
+.main_list ul{
+    counter-reset: steps;
+    list-style: none;
+    padding: 15px 20px;
+}
+
+.main_list li {
+    counter-increment: steps;
+
+    display: flex;
+    align-items: flex-start;
+
+    color: white;
+    font-size: 20px;
+    line-height: 1.3;
+
+    margin-bottom: 20px;
+}
+
+.main_list li::before {
+    content: counter(steps, decimal-leading-zero);
+
+    flex: 0 0 45px;
+
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.foot {
+  font-size: 25px;
+  font-weight: 900;
+  color: rgb(226, 7, 7);
+  background-color: white;
+  padding-inline: 10px;
+}
+
+footer {
+  background-color: #484cab;
+  color: #fbfbfb89;
+  padding: 20px;
+  margin: 20px;
+  margin-bottom: 0;
+  border-radius: 30px 30px 0px 0px;
+  border: solid 1px rgba(255, 255, 255, 0.619);
+}
+
+.hero_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+
+    width: 100%;
+    max-width: 1400px;
+    margin: 20px auto 0;
+    padding: 40px 20px;
+}
+
+.text_hero_container {
+    flex: 1;
+    min-width: 0;
+}
+
+.text_hero_container h1 {
+    font-size: 40px;
+    color: white;
+}
+
+.text_hero_container p {
+    margin-top: 30px;
+    font-size: 20px;
+    color: white;
+    border: 1px solid white;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+.hero_image_container {
+    flex: 0 0 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero_image_container img {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+
+@media (max-width: 700px) {
+    .hero_container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 5px;
+        padding: 20px 18px;
+        margin-top: 20px;
+    }
+
+    .text_hero_container {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .hero_image_container {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .hero_image_container img {
+        width: 150px;
+        max-width: none;
+        height: auto;
+        display: block;
+    }
+}
+
+/* =====================================================
+   LAPTOP / DESKTOP
+   ===================================================== */
+
+@media (min-width: 701px) {
+
+    /* ================= HEADER ================= */
+
+    header {
+        padding: 12px 30px;
+    }
+
+    .header_container {
+        max-width: 1000px;
+        min-height: 66px;
+
+        padding: 7px 16px;
+
+        border-radius: 50px;
+    }
+
+    .logo {
+        width: 62px;
+    }
+
+    .header_text {
+        font-size: 20px;
+        padding: 0 90px;
+    }
+
+
+    /* ================= HERO ================= */
+
+    .hero_container {
+        width: 100%;
+        max-width: 1000px;
+
+        /*
+         * Меньше расстояние от шапки
+         */
+        margin: 5px auto 0;
+
+        /*
+         * Уменьшаем вертикальный размер
+         */
+        padding: 20px 25px 10px;
+
+        min-height: 0;
+
+        display: grid;
+
+        /*
+         * Левая часть немного шире
+         */
+        grid-template-columns: 1.05fr 0.95fr;
+
+        align-items: center;
+
+        gap: 30px;
+
+        overflow: visible;
+    }
+
+
+    /* ================= ТЕКСТ ================= */
+
+    .text_hero_container {
+        width: 100%;
+        max-width: 520px;
+
+        min-width: 0;
+    }
+
+    .text_hero_container h1 {
+        font-size: 50px;
+
+        line-height: 1.05;
+
+        font-weight: 800;
+
+        color: white;
+
+        letter-spacing: -1px;
+    }
+
+    .hero_lined {
+        display: inline-block;
+
+        color: #fb0303;
+
+        background-color: white;
+
+        padding: 0 7px;
+
+        border-radius: 3px;
+    }
+
+
+    /* ================= ОПИСАНИЕ ================= */
+
+    .text_hero_container p {
+        display: block;
+
+        width: 100%;
+        max-width: 390px;
+
+        margin-top: 18px;
+
+        padding: 13px 16px;
+
+        font-size: 16px;
+
+        line-height: 1.3;
+
+        color: white;
+
+        border:
+            1px solid rgba(255, 255, 255, 0.85);
+
+        border-radius: 15px;
+
+        background:
+            rgba(255, 255, 255, 0.08);
+
+        backdrop-filter: blur(10px);
+
+        box-sizing: border-box;
+    }
+
+
+    /* ================= КАРТИНКА ================= */
+
+    .hero_image_container {
+        width: 100%;
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        align-items: center;
+    }
+
+    .hero_image_container img {
+        display: block;
+
+        width: 100%;
+
+        max-width: 400px;
+
+        height: auto;
+
+        filter:
+            drop-shadow(
+                0 15px 20px rgba(0, 0, 0, 0.2)
+            );
+    }
+
+
+    /* ================= СЛАЙДЕР ================= */
+
+    /*
+     * Слайдер находится после Hero,
+     * поэтому сейчас мы выравниваем его
+     * по левой части Hero.
+     */
+
+    .slide_all {
+        width: 100%;
+        max-width: 1000px;
+
+        margin: 0 auto;
+
+        padding:
+            0 25px;
+
+        display: flex;
+
+        justify-content: flex-start;
+    }
+
+    .slider-container {
+        width: 100%;
+
+        max-width: 490px;
+
+        padding: 0;
+
+        height: auto;
+    }
+
+    .slider {
+        width: 100%;
+
+        padding: 7px;
+
+        border-radius: 65px;
+
+        background:
+            rgba(255, 255, 255, 0.88);
+
+        backdrop-filter: blur(15px);
+
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.22);
+    }
+
+    .slider-track {
+        width: 100%;
+
+        height: 82px;
+
+        border-radius: 55px;
+    }
+
+
+    /* ================= КРУГ ================= */
+
+    .slider-thumb {
+        width: 70px;
+        height: 70px;
+
+        left: 6px;
+    }
+
+    .slider-thumb svg {
+        width: 28px;
+        height: 28px;
+    }
+
+
+    /* ================= ТЕКСТ СЛАЙДЕРА ================= */
+
+    .slider-text {
+        left: 62%;
+
+        font-size: 19px;
+
+        font-weight: 600;
+
+        white-space: nowrap;
+    }
+
+
+    /* ================= ПРОВЕДИ ВПРАВО ================= */
+
+    .provedy {
+        width: 490px;
+
+        max-width: calc(100% - 50px);
+
+        margin: 7px 0 0;
+
+        margin-left:
+            calc((100% - 1000px) / 2 + 25px);
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 7px;
+    }
+
+    .provedy p {
+        color: white;
+
+        font-size: 14px;
+
+        margin: 0;
+    }
+
+    .provedy_vpravo {
+        width: 25px;
+    }
+
+
+    /* ================= MAIN BLOCK ================= */
+
+    .main_block {
+        width: calc(100% - 60px);
+
+        max-width: 1000px;
+
+        margin: 35px auto 25px;
+
+        padding: 28px;
+
+        border-radius: 30px;
+
+        background:
+            rgba(255, 255, 255, 0.12);
+
+        backdrop-filter: blur(15px);
+
+        border:
+            1px solid rgba(255, 255, 255, 0.2);
+
+        box-shadow:
+            0 12px 35px rgba(0, 0, 0, 0.12);
+    }
+
+
+    /* ================= ЗАГОЛОВОК БЛОКА ================= */
+
+    .main_text {
+        padding: 0 0 20px;
+    }
+
+    .main_text h3 {
+        max-width: 800px;
+
+        color: white;
+
+        font-size: 27px;
+
+        line-height: 1.25;
+
+        font-weight: 700;
+
+        margin: 0;
+    }
+
+
+    /* ================= 01 02 03 ================= */
+
+    .main_list {
+        padding: 8px;
+
+        border-radius: 22px;
+
+        background:
+            rgba(35, 57, 183, 0.55);
+
+        border:
+            1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .main_list ul {
+        padding: 15px;
+
+        margin: 0;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 18px;
+
+        list-style: none;
+
+        counter-reset: steps;
+    }
+
+    .main_list li {
+        counter-increment: steps;
+
+        min-height: 120px;
+
+        margin: 0;
+
+        padding: 20px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        color: white;
+
+        font-size: 16px;
+
+        line-height: 1.35;
+
+        border-radius: 18px;
+
+        background:
+            rgba(255, 255, 255, 0.08);
+
+        border:
+            1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .main_list li::before {
+        content:
+            counter(
+                steps,
+                decimal-leading-zero
+            );
+
+        /*
+         * ВАЖНО:
+         * здесь НЕ должно быть
+         * counter-increment
+         */
+
+        margin-bottom: 12px;
+
+        font-size: 32px;
+
+        line-height: 1;
+
+        font-weight: 900;
+    }
+
+
+    /* ================= FOOT ================= */
+
+    .foot {
+        display: block;
+
+        width: fit-content;
+
+        max-width: calc(100% - 60px);
+
+        margin: 30px auto 25px;
+
+        padding: 7px 13px;
+
+        font-size: 20px;
+
+        border-radius: 7px;
+    }
+
+
+    /* ================= FOOTER ================= */
+
+    footer {
+        width: calc(100% - 60px);
+
+        max-width: 1000px;
+
+        margin: 0 auto;
+
+        padding: 20px 25px;
+
+        border-radius:
+            25px 25px 0 0;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        gap: 20px;
+
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Вход в школу | ШКОЛЬНАЯ ДЕМОКРАТИЯ</title>
+
+  <link rel="stylesheet" href="auth.css">
+
+  <!-- Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+</head>
+
+<body>
+
+  <header>
+    <div class="header_container">
+      <img
+        src="images/ЛОГО СИНИЙ.png"
+        alt="Школьная демократия"
+        class="logo"
+      >
+      <p class="header_text">
+        ШКОЛЬНАЯ ДЕМОКРАТИЯ
+      </p>
+    </div>
+  </header>
+
+  <main class="login">
+
+        <div class="login_container">
+
+            <h1>Вход в школу</h1>
+
+            <p class="subtitle">
+                Введи код своей школы
+            </p>
+
+            <div class="code_input" id="codeInput">
+
+                <div class="code_dot"></div>
+                <div class="code_dot"></div>
+                <div class="code_dot"></div>
+                <div class="code_dot"></div>
+                <div class="code_dot"></div>
+                <div class="code_dot"></div>
+
+            </div>
+
+            <!-- Настоящее поле ввода.
+                 Оно невидимое, но при нажатии открывает клавиатуру -->
+            <input
+                type="text"
+                id="hiddenInput"
+                maxlength="6"
+                autocomplete="off"
+                autocapitalize="characters"
+                spellcheck="false"
+            >
+
+            <p class="error" id="errorMessage">
+                Неправильный код
+            </p>
+
+        </div>
+
+    </main>
+
+    <script src="login.js"></script>
+
+</body>
