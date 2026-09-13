@@ -66,52 +66,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const onSlideComplete = () => {
-    try {
-  // Отправляем голос на сервер
-  const response = await fetch('/api/vote', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ option: selectedOption })
-  });
-
-  const data = await response.json();
-
-  if (data.success) {
-    localStorage.setItem('poll_voted_stolovaya', 'true');
-    setTimeout(() => {
-      pollContainer.classList.add('voted');
-      overlay.classList.add('show');
-    }, 400);
+  const onSlideComplete = async () => {
+  // 1. СНАЧАЛА проверяем, выбран ли вариант
+  if (!selectedOption) {
+    resetSlider();
+    sliderTrack.classList.add('shake');
+    setTimeout(() => sliderTrack.classList.remove('shake'), 300);
+    return;
   }
-} catch (error) {
-  console.error('Ошибка при отправке голоса:', error);
-  resetSlider();
-}
-    // Проверяем, выбран ли вариант
-    if (!selectedOption) {
-      // Если не выбран — возвращаем слайдер назад
+
+  // 2. Только теперь блокируем слайдер
+  isCompleted = true;
+  isDragging = false;
+  sliderThumb.classList.remove('dragging');
+  sliderThumb.style.cursor = 'default';
+
+  if (sliderText) sliderText.style.opacity = '0';
+  sliderThumb.style.background = '#34c759';
+  sliderThumb.style.boxShadow = '0 4px 20px rgba(52, 199, 89, 0.6)';
+  sliderThumb.innerHTML = `
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="white"/>
+    </svg>
+  `;
+
+  // 3. Отправляем голос на сервер
+  try {
+    const response = await fetch('/api/vote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ option: selectedOption })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      localStorage.setItem('poll_voted_stolovaya', 'true');
+      setTimeout(() => {
+        pollContainer.classList.add('voted');
+        overlay.classList.add('show');
+      }, 400);
+    } else if (data.error === 'Already voted') {
+      localStorage.setItem('poll_voted_stolovaya', 'true');
+      setTimeout(() => {
+        pollContainer.classList.add('voted');
+        overlay.classList.add('show');
+      }, 400);
+    } else {
       resetSlider();
-      // Можно добавить визуальную подсказку (тряску)
-      sliderTrack.classList.add('shake');
-      setTimeout(() => sliderTrack.classList.remove('shake'), 300);
-      return;
     }
-
-    isCompleted = true;
-    isDragging = false;
-    sliderThumb.classList.remove('dragging');
-    sliderThumb.style.cursor = 'default';
-
-    // Визуал завершения
-    if (sliderText) sliderText.style.opacity = '0';
-    sliderThumb.style.background = '#34c759';
-    sliderThumb.style.boxShadow = '0 4px 20px rgba(52, 199, 89, 0.6)';
-    sliderThumb.innerHTML = `
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="white"/>
-      </svg>
-    `;
+  } catch (error) {
+    console.error('Ошибка при отправке голоса:', error);
+    resetSlider();
+  }
+};
 
     // Сохраняем в localStorage
     localStorage.setItem('poll_voted_stolovaya', 'true');
