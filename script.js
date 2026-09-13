@@ -11,7 +11,7 @@ let thumbOffset = 0;
 let isCompleted = false;
 
 // URL для перехода
-const redirectUrl = '/auth.html'; // Замените на вашу ссылку
+const redirectUrl = 'auth.html'; // Замените на вашу ссылку
 
 const getMaxOffset = () => {
   const trackWidth = sliderTrack.offsetWidth;
