@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sliderTrack = document.getElementById('pollSliderTrack');
   const sliderThumb = document.getElementById('pollSliderThumb');
   const sliderText = sliderTrack ? sliderTrack.querySelector('.slider-text') : null;
+  const sliderTextMask = document.getElementById('pollSliderTextMask');
 
   let isDragging = false;
   let startX = 0;
@@ -65,6 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const green = 59 + Math.round(progress * 196);
     const blue = 48 - Math.round(progress * 48);
     sliderThumb.style.background = `rgb(${red}, ${green}, ${blue})`;
+    // Обновляем маску — стираем текст
+    if (sliderTextMask) {
+      sliderTextMask.style.width = (progress * 100) + '%';
+}
 
     if (newX >= maxOffset && !isCompleted) {
       onSlideComplete();
@@ -82,6 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Только теперь блокируем слайдер
     isCompleted = true;
+    if (sliderTextMask) {
+      sliderTextMask.style.width = '100%';
+}
     isDragging = false;
     sliderThumb.classList.remove('dragging');
     sliderThumb.style.cursor = 'default';
@@ -136,6 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
     isCompleted = false; // ВАЖНО: сбрасываем, чтобы можно было попробовать снова
     sliderThumb.classList.remove('dragging');
     sliderThumb.classList.remove('completed');
+    if (sliderTextMask) {
+      sliderTextMask.style.width = '0%';
+}
   };
 
   // === 4. СОБЫТИЯ МЫШИ И ТАЧА ===

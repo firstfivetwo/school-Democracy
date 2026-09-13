@@ -2,75 +2,62 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
   font-family: 'Montserrat', sans-serif;
 }
 
 body {
-background: linear-gradient(135deg, #2339B7 0%, #FBFBFB 100%);
-min-height: 100vh;
+  background: linear-gradient(135deg, #2339B7 0%, #FBFBFB 100%);
+  min-height: 100vh;
 }
 
-
+/* ===== HEADER ===== */
 header {
   position: sticky;
   top: 0;
   z-index: 1000;
-
   padding: 20px;
 }
 
 .header_container {
   width: 100%;
   max-width: 1400px;
-
   margin: 0 auto;
-
   background-color: rgba(255, 255, 255, 0.914);
   backdrop-filter: blur(15px);
-
   padding: 10px;
-
   border-radius: 50px;
-
   display: flex;
   align-items: center;
   position: relative;
-
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
 }
 
 .logo {
   width: 81px;
   height: auto;
-
   flex-shrink: 0;
-  
-  position: relative; /* Чтобы быть уверенным, что лого на своем месте */
-  z-index: 2; /* Чтобы лого был поверх текста при наложении */
+  position: relative;
+  z-index: 2;
 }
 
-
-.header_text  {
+.header_text {
   font-size: 24px;
   font-weight: 700;
   line-height: 1.15;
-
   white-space: normal;
-
   min-width: 0;
-
   text-align: center;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 100%; 
-  padding: 0 100px; 
-  z-index: 1; 
-  pointer-events: none; 
+  width: 100%;
+  padding: 0 100px;
+  z-index: 1;
+  pointer-events: none;
 }
 
+/* ===== ЗАГОЛОВОК ===== */
 .golosovanie {
   padding-inline: 20px;
   color: white;
@@ -78,7 +65,7 @@ header {
   margin-top: 5px;
 }
 
-/* --- Контейнер опроса --- */
+/* ===== КОНТЕЙНЕР ОПРОСА ===== */
 .poll-container {
   position: relative;
   background: rgba(255, 255, 255, 0.15);
@@ -92,7 +79,6 @@ header {
   transition: opacity 0.4s ease;
 }
 
-/* Затемнение после голосования */
 .poll-container.voted .poll-content {
   opacity: 0.3;
   filter: blur(2px);
@@ -108,7 +94,7 @@ header {
   line-height: 1.3;
 }
 
-/* --- Чекбоксы --- */
+/* ===== ЧЕКБОКСЫ ===== */
 .poll-options {
   display: flex;
   flex-direction: column;
@@ -132,7 +118,6 @@ header {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Скрываем нативный чекбокс */
 .poll-checkbox {
   position: absolute;
   opacity: 0;
@@ -140,7 +125,6 @@ header {
   height: 0;
 }
 
-/* Кастомный кружок чекбокса */
 .custom-checkbox {
   flex-shrink: 0;
   width: 24px;
@@ -153,14 +137,12 @@ header {
   transition: all 0.2s ease;
 }
 
-/* Иконка галочки внутри (скрыта по умолчанию) */
 .custom-checkbox svg {
   stroke-dasharray: 16px;
   stroke-dashoffset: 16px;
   transition: stroke-dashoffset 0.3s ease;
 }
 
-/* Состояние выбранного чекбокса */
 .poll-checkbox:checked + .custom-checkbox {
   background: #34c759;
   border-color: #34c759;
@@ -177,16 +159,16 @@ header {
   font-weight: 600;
 }
 
-/* --- Слайдер --- */
+/* ===== СЛАЙДЕР В ОПРОСЕ ===== */
 .poll-slider-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .poll-slider-wrapper .slider-container {
   width: 100%;
-  max-width: 350px;
+  max-width: 100%;
   padding: 0;
   height: auto;
 }
@@ -223,7 +205,12 @@ header {
   align-items: center;
   box-shadow: 0 4px 15px rgba(255, 59, 48, 0.4);
   cursor: grab;
-  z-index: 2;
+  z-index: 3;
+}
+
+.poll-slider-wrapper .slider-thumb.completed {
+  background: #34c759;
+  box-shadow: 0 4px 20px rgba(52, 199, 89, 0.6);
 }
 
 .poll-slider-wrapper .slider-text {
@@ -236,15 +223,36 @@ header {
   font-weight: 600;
   pointer-events: none;
   white-space: nowrap;
+  z-index: 1;
+  transition: opacity 0.1s ease;
 }
 
-/* Состояние "проголосовано" для слайдера */
-.poll-slider-wrapper .slider-thumb.completed {
-  background: #34c759;
-  box-shadow: 0 4px 20px rgba(52, 199, 89, 0.6);
+.poll-slider-wrapper .slider-text-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+  background: transparent;
+  border-radius: 20px;
 }
 
-/* --- Оверлей "Твой голос учтён" --- */
+.poll-slider-wrapper .slider-text-mask .slider-text {
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  color: #1a1a1a;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+/* ===== ОВЕРЛЕЙ ===== */
 .poll-overlay {
   position: absolute;
   top: 0;
@@ -257,9 +265,9 @@ header {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
-  background: rgba(4, 10, 43, 0.186);
-  backdrop-filter: blur(20px);
+  background: rgba(128, 132, 158, 0.5);
   border-radius: 30px;
+  z-index: 10;
 }
 
 .poll-overlay.show {
@@ -270,9 +278,10 @@ header {
 .overlay-content {
   text-align: center;
   color: white;
-  background-color: #3721c87c;
+  background-color: #052feb7c;
   padding: 20px;
   border-radius: 20px;
+  box-shadow: 0px 0px 50px 0px rgba(34, 60, 80, 0.3);
 }
 
 .overlay-content svg {
@@ -284,21 +293,21 @@ header {
   font-weight: 700;
 }
 
-/* Адаптив для телефона */
+/* ===== АДАПТИВ ===== */
 @media (max-width: 500px) {
   .poll-container {
     margin: 20px 15px;
     padding: 20px 15px;
   }
-  
+
   .poll-question {
     font-size: 18px;
   }
-  
+
   .poll-slider-wrapper .slider-track {
     height: 54px;
   }
-  
+
   .poll-slider-wrapper .slider-thumb {
     width: 44px;
     height: 44px;

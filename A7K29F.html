@@ -3,103 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Школа №1</title>
-
   <link rel="stylesheet" href="A7K29F.css">
-
-  <!-- Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
   <header>
     <div class="header_container">
-      <img
-        src="images/ЛОГО СИНИЙ.png"
-        alt="Школьная демократия"
-        class="logo"
-      >
-      <p class="header_text">
-        ШКОЛЬНАЯ ДЕМОКРАТИЯ
-      </p>
+      <img src="images/ЛОГО СИНИЙ.png" alt="Школьная демократия" class="logo">
+      <p class="header_text">ШКОЛЬНАЯ ДЕМОКРАТИЯ</p>
     </div>
   </header>
-  <!-- Блок опроса -->
 
   <h2 class="golosovanie">Голосование</h2>
-<div class="poll-container" id="pollContainer">
-  <div class="poll-content">
-    <h2 class="poll-question">Что можно добавить в школу?</h2>
 
-    <div class="poll-options">
-      <!-- Вариант 1 -->
-      <label class="poll-option">
-        <input type="checkbox" name="poll" value="baking" class="poll-checkbox">
-        <span class="custom-checkbox">
-          <svg width="12px" height="10px" viewBox="0 0 12 10">
-            <polyline points="1.5 6 4.5 9 10.5 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="none" stroke="white"></polyline>
-          </svg>
-        </span>
-        <span class="option-text">Музыку на переменах</span>
-      </label>
+  <div class="poll-container" id="pollContainer">
+    <div class="poll-content">
+      <h2 class="poll-question">Что можно добавить в школу?</h2>
 
-      <!-- Вариант 2 -->
-      <label class="poll-option">
-        <input type="checkbox" name="poll" value="salads" class="poll-checkbox">
-        <span class="custom-checkbox">
-          <svg width="12px" height="10px" viewBox="0 0 12 10">
-            <polyline points="1.5 6 4.5 9 10.5 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="none" stroke="white"></polyline>
-          </svg>
-        </span>
-        <span class="option-text">Больше уроков</span>
-      </label>
+      <div class="poll-options">
+        <label class="poll-option">
+          <input type="checkbox" name="poll" value="music" class="poll-checkbox">
+          <span class="custom-checkbox">
+            <svg width="12px" height="10px" viewBox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="none" stroke="white"></polyline>
+            </svg>
+          </span>
+          <span class="option-text">Музыку на переменах</span>
+        </label>
 
-      <!-- Вариант 3 -->
-      <label class="poll-option">
-        <input type="checkbox" name="poll" value="fruits" class="poll-checkbox">
-        <span class="custom-checkbox">
-          <svg width="12px" height="10px" viewBox="0 0 12 10">
-            <polyline points="1.5 6 4.5 9 10.5 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="none" stroke="white"></polyline>
-          </svg>
-        </span>
-        <span class="option-text">Дискотеки перед каникулами</span>
-      </label>
-    </div>
+        <label class="poll-option">
+          <input type="checkbox" name="poll" value="lessons" class="poll-checkbox">
+          <span class="custom-checkbox">
+            <svg width="12px" height="10px" viewBox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="none" stroke="white"></polyline>
+            </svg>
+          </span>
+          <span class="option-text">Больше уроков</span>
+        </label>
 
-    <!-- Слайдер подтверждения -->
-    <div class="poll-slider-wrapper">
-      <div class="slider-container">
-        <div class="slider">
-          <div class="slider-track" id="pollSliderTrack">
-            <div class="slider-thumb" id="pollSliderThumb">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z" fill="white"/>
-              </svg>
+        <label class="poll-option">
+          <input type="checkbox" name="poll" value="discos" class="poll-checkbox">
+          <span class="custom-checkbox">
+            <svg width="12px" height="10px" viewBox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="none" stroke="white"></polyline>
+            </svg>
+          </span>
+          <span class="option-text">Дискотеки перед каникулами</span>
+        </label>
+      </div>
+
+      <div class="poll-slider-wrapper">
+        <div class="slider-container">
+          <div class="slider">
+            <div class="slider-track" id="pollSliderTrack">
+              <div class="slider-thumb" id="pollSliderThumb">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z" fill="white"/>
+                </svg>
+              </div>
+              <span class="slider-text" id="pollSliderText">Свайп чтобы проголосовать</span>
+              <div class="slider-text-mask" id="pollSliderTextMask">
+                <span class="slider-text" id="pollSliderTextMasked">Свайп чтобы проголосовать</span>
+              </div>
             </div>
-            <span class="slider-text">Проведи, чтобы проголосовать</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Оверлей после голосования -->
-  <div class="poll-overlay" id="pollOverlay">
-    <div class="overlay-content">
-      <svg width="50" height="50" viewBox="0 0 24 24" fill="none">
-        <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="#34c759"/>
-      </svg>
-      <p>Ты проголосовал!</p>
+    <div class="poll-overlay" id="pollOverlay">
+      <div class="overlay-content">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="none">
+          <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="#34c759"/>
+        </svg>
+        <p>Ты проголосовал!</p>
+      </div>
     </div>
   </div>
-</div>
-<script src="A7K29F.js"></script>
+
+  <script src="A7K29F.js"></script>
 </body>
 </html>
