@@ -1,3 +1,22 @@
+// Проверяем, не вошел ли пользователь уже
+async function checkIfAlreadyLoggedIn() {
+  try {
+    const response = await fetch('/api/check-session');
+    const data = await response.json();
+
+    if (data.authenticated) {
+      // Пользователь уже вошел — сразу на главную
+      window.location.href = 'main.html';
+    }
+  } catch (error) {
+    // Если ошибка (функция не работает) — ничего не делаем, пусть вводит код
+    console.log('Проверка сессии не удалась');
+  }
+}
+
+// Запускаем проверку при загрузке страницы
+checkIfAlreadyLoggedIn();
+
 const codeInput = document.getElementById("codeInput");
 const hiddenInput = document.getElementById("hiddenInput");
 const dots = document.querySelectorAll(".code_dot");
