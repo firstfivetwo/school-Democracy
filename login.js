@@ -6,7 +6,7 @@ async function checkIfAlreadyLoggedIn() {
 
     if (data.authenticated) {
       // Пользователь уже вошел — сразу на главную
-      window.location.href = 'main.html';
+      window.location.href = 'A7K29F.html';
     }
   } catch (error) {
     // Если ошибка (функция не работает) — ничего не делаем, пусть вводит код
