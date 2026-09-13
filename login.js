@@ -56,8 +56,9 @@ async function checkCode() {
   const enteredCode = hiddenInput.value;
 
   try {
-    const response = await fetch('/.netlify/functions/validate-code', {
+    const response = await fetch('/api/validate', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code: enteredCode })
     });
 
@@ -77,7 +78,6 @@ async function checkCode() {
       setTimeout(() => codeInput.classList.remove("shake"), 300);
     }
   } catch (error) {
-    // Если функции ещё нет (Drag and Drop), показываем ошибку
     errorMessage.classList.add("show");
     codeInput.classList.add("shake");
     setTimeout(() => codeInput.classList.remove("shake"), 300);
