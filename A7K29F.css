@@ -80,8 +80,6 @@ header {
 }
 
 .poll-container.voted .poll-content {
-  opacity: 0.3;
-  filter: blur(2px);
   pointer-events: none;
 }
 

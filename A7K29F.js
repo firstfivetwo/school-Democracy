@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // === ЗАВЕРШЕНИЕ СЛАЙДЕРА (вызывается в endDrag) ===
+  // === ЗАВЕРШЕНИЕ СЛАЙДЕРА ===
   const onSlideComplete = async () => {
     if (!selectedOption) {
       resetSlider();
@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
 
       if (data.success || data.error === 'Already voted') {
+        localStorage.setItem('poll_voted_school', 'true');
         pollContainer.classList.add('voted');
         loadStats();
       } else {
@@ -144,6 +145,18 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error('Ошибка загрузки статистики:', error);
     }
+  }
+
+  // === ПРОВЕРКА: ГОЛОСОВАЛ ЛИ УЖЕ? (внизу, после объявления всех функций) ===
+  const hasVoted = localStorage.getItem('poll_voted_school');
+  if (hasVoted === 'true') {
+    pollContainer.classList.add('voted');
+    checkboxes.forEach(cb => cb.disabled = true);
+    isCompleted = true;
+    if (sliderText) sliderText.style.opacity = '0';
+    sliderThumb.classList.add('completed');
+    loadStats();
+    return;
   }
 
   // === СОБЫТИЯ ===
