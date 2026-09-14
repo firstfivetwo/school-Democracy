@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="/images/ЛОГО СИНИЙ.png" type="image/x-icon">
 </head>
 <body>
 
@@ -84,6 +85,47 @@
       </div>
     </div>
   </div>
+
+  <div class="complaint-container">
+  <h2 class="complaint-title">Оставить жалобу или предложение</h2>
+
+  <form id="complaintForm" class="complaint-form">
+    <!-- Поле имени (необязательное) -->
+    <div class="form-group">
+      <label for="complaintName">Имя (можно не указывать)</label>
+      <input 
+        type="text" 
+        id="complaintName" 
+        name="name" 
+        placeholder="Как к тебе обращаться?"
+        autocomplete="off"
+      >
+    </div>
+
+    <!-- Поле текста (обязательное) -->
+    <div class="form-group">
+      <label for="complaintText">Текст жалобы</label>
+      <textarea 
+        id="complaintText" 
+        name="text" 
+        rows="5" 
+        placeholder="Опиши проблему подробно..."
+        required
+      ></textarea>
+    </div>
+
+    <!-- Скрытое поле для защиты от спама -->
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+    <!-- Кнопка отправки -->
+    <button type="submit" id="complaintSubmit" class="complaint-btn">
+      Отправить анонимно
+    </button>
+
+    <!-- Сообщение о статусе -->
+    <p id="complaintMessage" class="complaint-message"></p>
+  </form>
+</div>
 
   <script src="A7K29F.js"></script>
 </body>
