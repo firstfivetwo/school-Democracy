@@ -393,6 +393,8 @@ header {
 
 .news-headline {
   color: #34c759;
+  background-color: white;
+  padding: 5px;
   font-size: 17px;
   font-weight: 700;
   margin-bottom: 8px;
