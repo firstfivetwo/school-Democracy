@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
 
       if (data.success) {
-        message.textContent = 'Жалоба отправлена. Спасибо!';
+        message.textContent = 'Сообщение отправлено. Спасибо!';
         message.className = 'complaint-message show success';
         submitBtn.textContent = '✓ Отправлено';
         submitBtn.classList.add('sent');
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
       message.textContent = 'Сервер не отвечает. Попробуй позже.';
       message.className = 'complaint-message show error';
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Отправить анонимно';
+      submitBtn.textContent = 'Отправить сообщение';
     }
   });
 });
