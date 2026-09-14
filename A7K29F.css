@@ -252,7 +252,51 @@ header {
   z-index: 1;
 }
 
+/* --- Скрытие чекбоксов после голосования --- */
+.poll-container.voted .custom-checkbox {
+  display: none;
+}
 
+.poll-container.voted .poll-option {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* --- Подсветка выбранного варианта --- */
+.poll-option.selected {
+  background: rgba(52, 199, 89, 0.25);
+  border-color: #34c759;
+}
+
+/* --- Проценты напротив варианта --- */
+.poll-option-percent {
+  font-size: 14px;
+  font-weight: 700;
+  color: #34c759;
+  margin-left: auto;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.poll-option-percent.show {
+  opacity: 1;
+}
+
+/* --- Скрытие слайдера после голосования --- */
+.poll-container.voted .poll-slider-wrapper {
+  display: none;
+}
+
+/* --- Заблокированные чекбоксы --- */
+.poll-checkbox:disabled + .custom-checkbox {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.poll-option:has(.poll-checkbox:disabled) {
+  cursor: not-allowed;
+  pointer-events: none;
+}
 
 /* ===== ОВЕРЛЕЙ ===== */
 .poll-overlay {
