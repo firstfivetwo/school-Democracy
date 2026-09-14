@@ -4,7 +4,7 @@ const redis = Redis.fromEnv();
 
 export default async function handler(request, response) {
   try {
-    const options = ['baking', 'salads', 'fruits'];
+    const options = ['music', 'discos', 'events'];
     const results = {};
 
     for (const option of options) {
