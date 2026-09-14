@@ -19,17 +19,17 @@ export default async function handler(request, response) {
     const sessionMatch = cookies.match(/school_session=([^;]+)/);
     const sessionId = sessionMatch ? sessionMatch[1] : 'anonymous';
 
-    // Проверяем, голосовал ли уже
-    const hasVoted = await redis.get(`voted:${sessionId}`);
-    if (hasVoted) {
-      return response.status(403).json({ error: 'Already voted' });
-    }
+    // === ВРЕМЕННО ОТКЛЮЧЕНО ДЛЯ ТЕСТА ===
+    // const hasVoted = await redis.get(`voted:${sessionId}`);
+    // if (hasVoted) {
+    //   return response.status(403).json({ error: 'Already voted' });
+    // }
 
     // Увеличиваем счетчик для выбранного варианта
     await redis.incr(`vote:${option}`);
 
-    // Помечаем пользователя как проголосовавшего (30 дней)
-    await redis.set(`voted:${sessionId}`, 'true', { ex: 2592000 });
+    // === ВРЕМЕННО ОТКЛЮЧЕНО ДЛЯ ТЕСТА ===
+    // await redis.set(`voted:${sessionId}`, 'true', { ex: 2592000 });
 
     return response.status(200).json({ success: true });
   } catch (error) {

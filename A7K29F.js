@@ -124,28 +124,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // === ЗАГРУЗКА СТАТИСТИКИ ===
   async function loadStats() {
-    try {
-      const response = await fetch('/api/results');
-      const data = await response.json();
+  try {
+    const response = await fetch('/api/results');
+    const data = await response.json();
 
-      let total = 0;
-      Object.values(data).forEach(count => total += count);
-      if (total === 0) return;
-
-      document.querySelectorAll('.poll-option').forEach(option => {
-        const value = option.dataset.value;
-        const count = data[value] || 0;
-        const percent = Math.round((count / total) * 100);
-        const percentEl = option.querySelector('.poll-option-percent');
-        if (percentEl) {
-          percentEl.textContent = `${percent}%`;
-          percentEl.classList.add('show');
-        }
-      });
-    } catch (error) {
-      console.error('Ошибка загрузки статистики:', error);
-    }
+    // Если все нули — показываем нули, но не выходим
+    document.querySelectorAll('.poll-option').forEach(option => {
+      const value = option.dataset.value;
+      const count = data[value] || 0;
+      const percentEl = option.querySelector('.poll-option-percent');
+      if (percentEl) {
+        percentEl.textContent = `${count} чел.`;
+        percentEl.classList.add('show');
+      }
+    });
+  } catch (error) {
+    console.error('Ошибка загрузки статистики:', error);
   }
+}
 
   // === ПРОВЕРКА: ГОЛОСОВАЛ ЛИ УЖЕ? (внизу, после объявления всех функций) ===
   const hasVoted = localStorage.getItem('poll_voted_school');

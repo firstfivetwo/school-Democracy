@@ -270,7 +270,7 @@ header {
 .poll-option-percent {
   font-size: 14px;
   font-weight: 700;
-  color: #34c759;
+  color: #f8f8f8;
   margin-left: auto;
   opacity: 0;
   transition: opacity 0.4s ease;
