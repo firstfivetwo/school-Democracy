@@ -200,4 +200,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: false });
   document.addEventListener('touchmove', (e) => onDrag(e.touches[0].clientX), { passive: false });
   document.addEventListener('touchend', endDrag, { passive: false });
+
+  // === КОПИРОВАНИЕ КОДА ШКОЛЫ ===
+const copyBtn = document.getElementById('copyCodeBtn');
+const codeEl = document.getElementById('schoolCode');
+
+if (copyBtn && codeEl) {
+  copyBtn.addEventListener('click', async () => {
+    const code = codeEl.textContent.trim();
+    try {
+      await navigator.clipboard.writeText(code);
+      copyBtn.textContent = '✓ Скопировано!';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyBtn.textContent = 'Скопировать код';
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    } catch (error) {
+      console.error('Ошибка копирования:', error);
+      copyBtn.textContent = 'Ошибка';
+    }
+  });
+}
+
+
 });

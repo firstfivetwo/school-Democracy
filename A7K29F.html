@@ -105,6 +105,27 @@
     </form>
   </div>
 
+  <div class="invite-container">
+  <h2 class="invite-title">Пригласи друзей</h2>
+  <p class="invite-subtitle">Поделись кодом школы</p>
+
+  <div class="invite-qr">
+    <img 
+      src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://school-democracy.vercel.app" 
+      alt="QR-код"
+      class="qr-image"
+    >
+  </div>
+
+  <div class="invite-code-block">
+    <p class="invite-label">Код школы:</p>
+    <div class="invite-code" id="schoolCode">A7K29F</div>
+    <button class="invite-copy-btn" id="copyCodeBtn">Скопировать код</button>
+  </div>
+
+  <p class="invite-hint">Отсканируй QR и введи код на странице входа</p>
+</div>
+
   <script src="/A7K29F.js"></script>
   <script src="/complaint.js"></script>
 </body>
