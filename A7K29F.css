@@ -634,12 +634,14 @@ header {
 }
 
 .invite-code {
-  color: white;
+  color: rgb(7, 243, 46);
   font-size: 28px;
   font-weight: 900;
   letter-spacing: 3px;
   margin-bottom: 12px;
   font-family: 'Montserrat', monospace;
+  background: white;
+  padding: 5px;
 }
 
 .invite-copy-btn:hover {
