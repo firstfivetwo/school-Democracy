@@ -109,20 +109,29 @@
   <h2 class="invite-title">Пригласи друзей</h2>
   <p class="invite-subtitle">Поделись кодом школы</p>
 
-  <div class="invite-qr">
-    <img 
-      src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://school-democracy.vercel.app" 
-      alt="QR-код"
-      class="qr-image"
-    >
-  </div>
+  <div class="invite-container">
+  <h2 class="invite-title">Пригласи друзей</h2>
+  
+  <div class="invite-content">
+    <div class="invite-qr">
+      <img 
+        src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://school-democracy.vercel.app" 
+        alt="QR-код"
+        class="qr-image"
+      >
+    </div>
 
-  <div class="invite-code-block">
-    <p class="invite-label">Код школы:</p>
-    <div class="invite-code" id="schoolCode">A7K29F</div>
-  </div>
+    <div class="invite-info">
+      <p class="invite-subtitle">Поделись ссылкой и кодом школы</p>
+      
+      <div class="invite-code-block">
+        <p class="invite-label">Код школы:</p>
+        <div class="invite-code" id="schoolCode">A7K29F</div>
+      </div>
 
-  <p class="invite-hint">Отсканируй QR и введи код на странице входа</p>
+      <p class="invite-hint">Отсканируй QR или введи код на странице входа</p>
+    </div>
+  </div>
 </div>
 
   <script src="/A7K29F.js"></script>
