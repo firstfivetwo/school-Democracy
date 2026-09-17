@@ -646,29 +646,6 @@ header {
   font-family: 'Montserrat', monospace;
 }
 
-.invite-copy-btn {
-  background: #34c759;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 16px;
-  font-size: 13px;
-  font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.invite-copy-btn:hover {
-  background: #2aa84a;
-  transform: translateY(-2px);
-}
-
-.invite-copy-btn.copied {
-  background: #ff3b30;
-}
 
 .invite-hint {
   color: rgba(255, 255, 255, 0.7);
