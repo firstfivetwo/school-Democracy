@@ -638,7 +638,9 @@ header {
 }
 
 .invite-code {
-  color: white;
+  color: rgb(17, 207, 42);
+  background-color: white;
+  padding: 5px;
   font-size: 24px;
   font-weight: 900;
   letter-spacing: 3px;
