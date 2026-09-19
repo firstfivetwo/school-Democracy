@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход в школу...</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #2339B7 0%, #FBFBFB 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+    }
+    .loading {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 40px 30px;
+      text-align: center;
+      color: white;
+      max-width: 400px;
+      width: 90%;
+    }
+    .loading h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .loading p {
+      font-size: 15px;
+      opacity: 0.8;
+      margin-bottom: 25px;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      margin: 0 auto;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading">
+    <div class="spinner"></div>
+    <h2>Входим в школу...</h2>
+    <p>Пожалуйста, подожди секунду</p>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Читаем код школы из адреса (?code=A7K29F)
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get('code');
+
+      // Если кода нет — отправляем на страницу входа
+      if (!code) {
+        window.location.href = '/auth.html';
+        return;
+      }
+
+      try {
+        // Отправляем код на сервер для проверки
+        const response = await fetch('/api/validate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: code })
+        });
+
+        const data = await response.json();
+
+        if (data.valid) {
+          // Код верный — перекидываем на главную
+          window.location.href = '/A7K29F.html';
+        } else {
+          // Код неверный — на страницу входа
+          window.location.href = '/auth.html';
+        }
+      } catch (error) {
+        console.error('Ошибка:', error);
+        // Если что-то пошло не так — на страницу входа
+        window.location.href = '/auth.html';
+      }
+    });
+  </script>
+</body>
+</html>
