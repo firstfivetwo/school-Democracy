@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
   // === ПРОВЕРКА: ГОЛОСОВАЛ ЛИ УЖЕ? (внизу, после объявления всех функций) ===
-  const hasVoted = localStorage.getItem('poll_voted_school');
+  const hasVoted = localStorage.getItem('poll_voted_school2');
   if (hasVoted === 'true') {
     pollContainer.classList.add('voted');
     checkboxes.forEach(cb => cb.disabled = true);
