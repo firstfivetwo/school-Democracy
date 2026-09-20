@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
 
       if (data.success || data.error === 'Already voted') {
-        localStorage.setItem('poll_voted_school', 'true');
+        localStorage.setItem('poll_voted_school2', 'true');
         pollContainer.classList.add('voted');
         loadStats();
       } else {
